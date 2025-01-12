@@ -73,6 +73,7 @@ const Board = () => {
   };
 
   return (
+    <div className="board-container">
     <div className="board">
       {board.map((row, rowIndex) => (
         <div key={rowIndex} className="board-row">
@@ -85,7 +86,8 @@ const Board = () => {
           ))}
         </div>
       ))}
-      {winner && <div className="winner">Player {winner} wins!</div>}
+    </div>
+    {winner && <div className="winner">Player {winner} wins!</div>}
     </div>
   );
 };
