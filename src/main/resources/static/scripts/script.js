@@ -2,9 +2,11 @@ let gameBoard = Array.from({ length: 6 }, () => Array(7).fill(null)); // 6 rows,
 
 let moveNr = 1; 
 let currentPlayer = 1; 
+let gameOver = false;
 
 document.addEventListener('DOMContentLoaded', () => {
     const gameBoardElement = document.getElementById('game-board');
+    const reloadButton = document.getElementById('reload-button');
 
     // Create the game board
     for (let i = 0; i < 6; i++) {
@@ -14,6 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
             cell.setAttribute('data-col', j);
 
             cell.addEventListener('click', (event) => {
+                if (gameOver) {
+                    console.log("Game is over");
+                    return;
+                }
                 const row = event.target.getAttribute('data-row');
                 const col = event.target.getAttribute('data-col');
                 if (gameBoard[row][col] !== null) {
@@ -25,16 +31,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 changeColor(cell, row, col);
 
-                if(checkWinner()) {
+                if (checkWinner()) {
                     notifyWinner(currentPlayer);
+                    reloadButton.style.display = 'block'; // Show the reload button
                     return;
                 }
-    
+
                 togglePlayer();
             });
             gameBoardElement.appendChild(cell);
         }
     }
+    
+    reloadButton.addEventListener('click', () => {
+        location.reload();
+    });
 });
 
 function togglePlayer() {
@@ -108,4 +119,5 @@ function checkWinner() {
 function notifyWinner(winner) {
     const winnerDiv = document.getElementById('winner');
     winnerDiv.textContent = `Player ${winner} wins!`;
+    gameOver = true;
 }
