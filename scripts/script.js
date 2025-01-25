@@ -118,8 +118,8 @@ function checkWinner() {
 
 function notifyWinner(winner) {
     const winnerDiv = document.getElementById('winner');
-    const player1Name = document.getElementById('player1-name').value || 'Player 1';
-    const player2Name = document.getElementById('player2-name').value || 'Player 2';
+    const player1Name = document.getElementById('player1-name').value || 'Yellow';
+    const player2Name = document.getElementById('player2-name').value || 'Red';
     const winnerName = winner === 1 ? player1Name : player2Name;
     winnerDiv.textContent = `${winnerName} wins!`;
     gameOver = true;
