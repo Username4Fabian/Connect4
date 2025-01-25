@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     reloadButton.addEventListener('click', () => {
-        location.reload();
+        resetGame();
     });
 });
 
@@ -118,6 +118,24 @@ function checkWinner() {
 
 function notifyWinner(winner) {
     const winnerDiv = document.getElementById('winner');
-    winnerDiv.textContent = `Player ${winner} wins!`;
+    const player1Name = document.getElementById('player1-name').value || 'Player 1';
+    const player2Name = document.getElementById('player2-name').value || 'Player 2';
+    const winnerName = winner === 1 ? player1Name : player2Name;
+    winnerDiv.textContent = `${winnerName} wins!`;
     gameOver = true;
+}
+
+function resetGame() {
+    gameBoard = Array.from({ length: 6 }, () => Array(7).fill(null));
+    moveNr = 1;
+    currentPlayer = 1;
+    gameOver = false;
+
+    const cells = document.querySelectorAll('#game-board div');
+    cells.forEach(cell => {
+        cell.style.backgroundColor = '';
+    });
+
+    document.getElementById('winner').textContent = '';
+    document.getElementById('reload-button').style.display = 'none';
 }

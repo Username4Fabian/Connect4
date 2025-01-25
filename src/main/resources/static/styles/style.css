@@ -64,3 +64,24 @@ h1 {
 #reload-button:hover {
     background-color: #666;
 }
+
+input[type="text"] {
+    font-family: 'Press Start 2P', cursive;
+    background-color: #444;
+    color: #fff;
+    border: 2px solid #d3d3d3;
+    padding: 10px;
+    margin: 10px 0;
+    width: 200px;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+input[type="text"]::placeholder {
+    color: #d3d3d3;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    background-color: #666;
+}
